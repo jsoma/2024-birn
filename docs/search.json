@@ -1,0 +1,208 @@
+[
+  {
+    "objectID": "02-scraping/02-scraping.html",
+    "href": "02-scraping/02-scraping.html",
+    "title": "Scraping tables",
+    "section": "",
+    "text": "!pip install --quiet pandas beautifulsoup4 pyperclip requests\n\n\n[notice] A new release of pip is available: 23.0.1 -&gt; 24.2\n[notice] To update, run: pip install --upgrade pip"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (completed).html",
+    "href": "01-pandas/02 - Using AI about AI (completed).html",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "",
+    "text": "Let’s see if we can use ChatGPT to walk us through how to do a complicated problem.\nIn April 2024, the Washington Post published Inside the secret list of websites that make AI like ChatGPT sound smart. This story analyzed the C4 dataset, a selection of data that’s part of the training process for large language models like ChatGPT.\nIt showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.\nLet’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.\n\nimport pandas as pd\npd.options.display.max_colwidth = 400\n\n# We're using a CSV right from the internet, but you can visit the URL if you'd like\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv\", nrows=3000)\ndf.head(10)"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (completed).html#now-that-we-know-a-little-python-using-ai-as-a-helper",
+    "href": "01-pandas/02 - Using AI about AI (completed).html#now-that-we-know-a-little-python-using-ai-as-a-helper",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "",
+    "text": "Let’s see if we can use ChatGPT to walk us through how to do a complicated problem.\nIn April 2024, the Washington Post published Inside the secret list of websites that make AI like ChatGPT sound smart. This story analyzed the C4 dataset, a selection of data that’s part of the training process for large language models like ChatGPT.\nIt showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.\nLet’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.\n\nimport pandas as pd\npd.options.display.max_colwidth = 400\n\n# We're using a CSV right from the internet, but you can visit the URL if you'd like\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv\", nrows=3000)\ndf.head(10)"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (completed).html#lets-get-crazy",
+    "href": "01-pandas/02 - Using AI about AI (completed).html#lets-get-crazy",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "Let’s get crazy",
+    "text": "Let’s get crazy\nWhat langage is each one of these in? Let’s get crazy by seeing what ChatGPT can help us do. This will be an exercise in asking specific questions, troubleshooting problems, and having a back-and-forth conversation with AI tools.\n\npip install langdetect\n\n\nimport pandas as pd\nfrom tqdm import tqdm\nfrom langdetect import detect\nfrom langdetect.lang_detect_exception import LangDetectException\n\ntqdm.pandas()\n\n# Assuming df is your DataFrame and 'text' is the column containing the text data\ndef detect_language(text):\n    try:\n        return detect(text)\n    except LangDetectException:\n        return 'unknown'  # In case language detection fails\n\n# Add the 'lang' column to the DataFrame\ndf['lang'] = df['text'].progress_apply(detect_language)\n\n\ndf\n\n\nfrom langdetect import detect_langs\nfrom langdetect.lang_detect_exception import LangDetectException\n\ndef detect_language_with_confidence(text):\n    try:\n        detections = detect_langs(text)\n        if detections:\n            top_detection = detections[0]\n            return top_detection.lang, top_detection.prob\n        else:\n            return 'unknown', 0.0\n    except LangDetectException:\n        return 'unknown', 0.0  # In case language detection fails\n\n# Apply the function to get both language and confidence score\ndf[['lang', 'confidence']] = df['text'].progress_apply(lambda x: pd.Series(detect_language_with_confidence(x)))\n\n\ndf\n\n\ndf['lang'].value_counts(normalize=True)\n\n\npip install fasttext\n\n\nimport urllib.request\n\n# URL for the lid.176.bin model\nurl = \"https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin\"\noutput_path = \"lid.176.bin\"\n\n# Download the file\nprint(\"Downloading lid.176.bin...\")\nurllib.request.urlretrieve(url, output_path)\nprint(\"Download complete!\")\n\n\nimport fasttext\n\n# Load the pre-trained language identification model\nmodel = fasttext.load_model('lid.176.bin')\n\ndef detect_language_fasttext(text):\n    # Clean the text by removing newlines\n    cleaned_text = text.replace('\\n', ' ').strip()\n    predictions = model.predict(cleaned_text)\n    lang = predictions[0][0].replace('__label__', '')\n    confidence = predictions[1][0]\n    return lang, confidence\n\ndf[['lang', 'confidence']] = df['text'].progress_apply(lambda x: pd.Series(detect_language_fasttext(x)))\n\n\ndf['lang'].value_counts(normalize=True)\n\n\ndf[df['lang'].isin(['hr', 'sr'])]\n\n\npd.options.display.max_colwidth = 500\n\n\ndf[df['lang'].isin(['hr', 'sr'])]"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (completed).html#saving-the-results",
+    "href": "01-pandas/02 - Using AI about AI (completed).html#saving-the-results",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "Saving the results",
+    "text": "Saving the results\n\ndf.to_csv(\"edited.csv\", index=False)"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (incomplete).html",
+    "href": "01-pandas/01 - Data analysis with pandas (incomplete).html",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "Even though we have Python installed, we still need to install some extra pieces of software! Python is a whole ecosystem of content, where many of the best abilities are from packages/libraries/modules that are made by other people or companies.\n\n%pip install --quiet pandas altair lxml tqdm requests\n\n\n\n\nTo use pandas, we first need to import it. Then we can go ahead with reading in our data and analyzing it.\n\nimport pandas as pd\n\n# This creates a \"dataframe\" - the Python version of a spreadsheet\n# We're using a CSV right from the internet, but you can also use it on your own computer\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/countries.csv\")\ndf\n\n\n\n\nWhen you save your CSV, you always need to include index=False. If you don’t, you get extra unnamed columns that are irritating to you and your coworkers!\n\n\n\nThere’s a good way to graph and a bad way to graph: the default is matplotlib, which is 100% the worst. A great alternative is Altair, which is more useful and produces prettier (and interactive!) graphics.\n\ndf.plot(x='gdp_per_capita', y='life_expectancy', kind='scatter')\n\n\nimport altair as alt\n\nalt.Chart(df).mark_circle(size=50)"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (incomplete).html#installation",
+    "href": "01-pandas/01 - Data analysis with pandas (incomplete).html#installation",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "Even though we have Python installed, we still need to install some extra pieces of software! Python is a whole ecosystem of content, where many of the best abilities are from packages/libraries/modules that are made by other people or companies.\n\n%pip install --quiet pandas altair lxml tqdm requests"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (incomplete).html#using-pandas",
+    "href": "01-pandas/01 - Data analysis with pandas (incomplete).html#using-pandas",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "To use pandas, we first need to import it. Then we can go ahead with reading in our data and analyzing it.\n\nimport pandas as pd\n\n# This creates a \"dataframe\" - the Python version of a spreadsheet\n# We're using a CSV right from the internet, but you can also use it on your own computer\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/countries.csv\")\ndf"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (incomplete).html#saving",
+    "href": "01-pandas/01 - Data analysis with pandas (incomplete).html#saving",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "When you save your CSV, you always need to include index=False. If you don’t, you get extra unnamed columns that are irritating to you and your coworkers!"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (incomplete).html#graphing",
+    "href": "01-pandas/01 - Data analysis with pandas (incomplete).html#graphing",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "There’s a good way to graph and a bad way to graph: the default is matplotlib, which is 100% the worst. A great alternative is Altair, which is more useful and produces prettier (and interactive!) graphics.\n\ndf.plot(x='gdp_per_capita', y='life_expectancy', kind='scatter')\n\n\nimport altair as alt\n\nalt.Chart(df).mark_circle(size=50)"
+  },
+  {
+    "objectID": "pandas.html",
+    "href": "pandas.html",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "Let’s get started! First we need to figure out where we are going to run our code. We can do this on the cloud with Google Colab or we can do this on our computer with Jupyterlab Desktop.\nUsing the cloud is nice because you don’t have to download anything or install anything, buuuuuuuut it’s less realistic. In real life you would use your own computer.\n\nGoogle ColabJupyterlab Desktop\n\n\nIf you want to use the cloud, you don’t have to install anything! Just move on to the next step.\n\n\nWhile running code in the cloud is nice and easy, most people end up doing their analysis on their own computers.\nFirst, download Jupyterlab Desktop by scrolling down to the section on Installation and download the correct version.\nWindows folks, download the Windows version. If you have an older mac, you want x64 Installer (Intel chip). The Apple silicon version is for an M1, M2, or M3 mac.\nThe startup instructions are ridiculous:\n\nJupyterlab Desktop can be launched from the GUI of your operating system by clicking the application’s icon or by using jlab command from the command line. Double clicking .ipynb files is also supported and it will launch Jupyterlab Desktop and load the notebook file.\n\nWhat? Just open it like you would any other software:\n\n\n\nOpen up Jupyterlab Desktop\n\n\n\n\n\n\n\n\nThere are two options for the code: the completed version and the fill-in-the-blanks version.\nI think the fill-in-the-blanks one is more fun! The completed version doesn’t have fun surprises, and you can always go back and look at it later.\n\nGoogle ColabJupyterlab Desktop\n\n\nJust click the version you’d like:\n\nThe fill-in-the-blanks version\nThe completed version\n\n\n\nDownload this file to get all of our notebooks and data files. You’ll need to extract the files from the zip by either double-clicking or right-click + Extract all.\nThen open Jupyterlab Desktop and select the version you’d like. Use ‘open’ to find the .ipynb file you downloaded, and you’ll be ready to go!\n\n\n\nOpen up Jupyterlab Desktop\n\n\nOne version is the completed version, the other one is incomplete and just waiting for us.\n\n\n\n\n\n\nEach block of code is called a cell. You need to tell Python to “run” the cell in order to have the code do anything.\nBoth Google Colab and Jupyterlab Desktop have a little play button you use to run code.\n\nGoogle ColabJupyterlab Desktop\n\n\n\n\n\nPlay button\n\n\n\n\n\n\n\nPlay button\n\n\n\n\n\n\n\n\nThere are two ways to make graphics:\n\nWith matplotlib, the worst thing on the planet\nWith Altair, the best thing on the planet.\n\nI recommend using Altair! You can find examples here.\n\n\n\nNow that you know how to run basic Python code, your world is infinitely larger! Try asking ChatGPT or Claude about how to do something, and it can walk you through step-by-step.\nNeed more explanation on what a line of code means, or how to run it in Jupyter? You now have the vocabulary to understand, and have a coherent back-and-forth with the chatbot!\nIn the notebooks below we use AI to help perform some very very fancy analysis:\n\nThe fill-in-the-blanks version\nThe completed version\n\nIf you’d prefer to use Jupyterlab Desktop, you can use this file to download of the content for this session, including the pandas walkthrough notebooks and the AI ones, too.\n\n\n\nA great resource is Ben Welsh’s First Python Notebook. It’s like a longer version of what we did today!",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#getting-started",
+    "href": "pandas.html#getting-started",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "Let’s get started! First we need to figure out where we are going to run our code. We can do this on the cloud with Google Colab or we can do this on our computer with Jupyterlab Desktop.\nUsing the cloud is nice because you don’t have to download anything or install anything, buuuuuuuut it’s less realistic. In real life you would use your own computer.\n\nGoogle ColabJupyterlab Desktop\n\n\nIf you want to use the cloud, you don’t have to install anything! Just move on to the next step.\n\n\nWhile running code in the cloud is nice and easy, most people end up doing their analysis on their own computers.\nFirst, download Jupyterlab Desktop by scrolling down to the section on Installation and download the correct version.\nWindows folks, download the Windows version. If you have an older mac, you want x64 Installer (Intel chip). The Apple silicon version is for an M1, M2, or M3 mac.\nThe startup instructions are ridiculous:\n\nJupyterlab Desktop can be launched from the GUI of your operating system by clicking the application’s icon or by using jlab command from the command line. Double clicking .ipynb files is also supported and it will launch Jupyterlab Desktop and load the notebook file.\n\nWhat? Just open it like you would any other software:\n\n\n\nOpen up Jupyterlab Desktop",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#getting-your-code",
+    "href": "pandas.html#getting-your-code",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "There are two options for the code: the completed version and the fill-in-the-blanks version.\nI think the fill-in-the-blanks one is more fun! The completed version doesn’t have fun surprises, and you can always go back and look at it later.\n\nGoogle ColabJupyterlab Desktop\n\n\nJust click the version you’d like:\n\nThe fill-in-the-blanks version\nThe completed version\n\n\n\nDownload this file to get all of our notebooks and data files. You’ll need to extract the files from the zip by either double-clicking or right-click + Extract all.\nThen open Jupyterlab Desktop and select the version you’d like. Use ‘open’ to find the .ipynb file you downloaded, and you’ll be ready to go!\n\n\n\nOpen up Jupyterlab Desktop\n\n\nOne version is the completed version, the other one is incomplete and just waiting for us.",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#running-your-code",
+    "href": "pandas.html#running-your-code",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "Each block of code is called a cell. You need to tell Python to “run” the cell in order to have the code do anything.\nBoth Google Colab and Jupyterlab Desktop have a little play button you use to run code.\n\nGoogle ColabJupyterlab Desktop\n\n\n\n\n\nPlay button\n\n\n\n\n\n\n\nPlay button",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#graphing",
+    "href": "pandas.html#graphing",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "There are two ways to make graphics:\n\nWith matplotlib, the worst thing on the planet\nWith Altair, the best thing on the planet.\n\nI recommend using Altair! You can find examples here.",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#tips-from-your-ai-friends",
+    "href": "pandas.html#tips-from-your-ai-friends",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "Now that you know how to run basic Python code, your world is infinitely larger! Try asking ChatGPT or Claude about how to do something, and it can walk you through step-by-step.\nNeed more explanation on what a line of code means, or how to run it in Jupyter? You now have the vocabulary to understand, and have a coherent back-and-forth with the chatbot!\nIn the notebooks below we use AI to help perform some very very fancy analysis:\n\nThe fill-in-the-blanks version\nThe completed version\n\nIf you’d prefer to use Jupyterlab Desktop, you can use this file to download of the content for this session, including the pandas walkthrough notebooks and the AI ones, too.",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "pandas.html#other-resources",
+    "href": "pandas.html#other-resources",
+    "title": "Data analysis with Python and pandas",
+    "section": "",
+    "text": "A great resource is Ben Welsh’s First Python Notebook. It’s like a longer version of what we did today!",
+    "crumbs": [
+      "Data analysis with python/pandas"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BIRN Summer School 2024",
+    "section": "",
+    "text": "BIRN Summer School 2024\nHi, I’m Soma! This is everything I presented at the BIRN Summer School in 2024.\nYou can find other resources of mine at:\n\njonathansoma.com\nEverything I Know\nPractical AI for Investigative Journalism\ninvestigate.ai\nYouTube",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (completed).html",
+    "href": "01-pandas/01 - Data analysis with pandas (completed).html",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "Even though we have Python installed, we still need to install some extra pieces of software! Python is a whole ecosystem of content, where many of the best abilities are from packages/libraries/modules that are made by other people or companies.\n\n%pip install --quiet pandas altair lxml tqdm requests\n\n\n\n\nTo use pandas, we first need to import it. Then we can go ahead with reading in our data and analyzing it.\n\nimport pandas as pd\n\n# This creates a \"dataframe\" - the Python version of a spreadsheet\n# We're using a CSV right from the internet, but you can also use it on your own computer\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/countries.csv\")\ndf\n\n\ndf.head()\n\n\ndf.head(2)\n\n\ndf.tail()\n\n\ndf.sort_values(by='gdp')\n\n\ndf.sort_values(by='gdp', ascending=False)\n\n\ndf.sort_values('life_expectancy', ascending=False).head(10)\n\n\ndf.head(10).sort_values('life_expectancy', ascending=False)\n\n\ndf['life_expectancy']\n\n\ndf['life_expectancy'].median()\n\n\ndf['life_expectancy'] &gt; 75\n\n\ndf[df['life_expectancy'] &gt; 75]\n\n\ndf['continent'].value_counts()\n\n\ndf['continent'].unique()\n\n\ndf[df['continent'] == 'Europe']\n\n\ndf[df['continent'] == 'Europe'].sort_values(by='life_expectancy', ascending=False)\n\n\ndf[df['continent'] == 'Europe']['life_expectancy'].median()\n\n\ndf['life_expectancy'].describe()\n\n\ndf.groupby('continent')['life_expectancy'].median()\n\n\ndf.groupby('continent')['life_expectancy'].median().reset_index()\n\n\ndf.groupby('continent').agg({\n    'life_expectancy': 'median',\n    'gdp': 'max'\n})\n\n\n# Try to save this as a column??????\ndf['gdp_per_capita'] = df['gdp'] / df['population']\ndf.head(2)\n\n\n\n\nWhen you save your CSV, you always need to include index=False. If you don’t, you get extra unnamed columns that are irritating to you and your coworkers!\n\ndf.to_csv(\"output.csv\", index=False)\n\n\n\n\nThere’s a good way to graph and a bad way to graph: the default is matplotlib, which is 100% the worst. A great alternative is Altair, which is more useful and produces prettier (and interactive!) graphics.\n\ndf.plot(x='gdp_per_capita', y='life_expectancy', kind='scatter')\n\n\nimport altair as alt\n\nalt.Chart(df).mark_circle(size=50).encode(\n    x='gdp_per_capita',\n    y='life_expectancy',\n    color='continent',\n    tooltip=['country', 'continent', 'life_expectancy', 'population']\n).properties(\n    width=800,\n    height=300\n).interactive()"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (completed).html#installation",
+    "href": "01-pandas/01 - Data analysis with pandas (completed).html#installation",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "Even though we have Python installed, we still need to install some extra pieces of software! Python is a whole ecosystem of content, where many of the best abilities are from packages/libraries/modules that are made by other people or companies.\n\n%pip install --quiet pandas altair lxml tqdm requests"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (completed).html#using-pandas",
+    "href": "01-pandas/01 - Data analysis with pandas (completed).html#using-pandas",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "To use pandas, we first need to import it. Then we can go ahead with reading in our data and analyzing it.\n\nimport pandas as pd\n\n# This creates a \"dataframe\" - the Python version of a spreadsheet\n# We're using a CSV right from the internet, but you can also use it on your own computer\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/countries.csv\")\ndf\n\n\ndf.head()\n\n\ndf.head(2)\n\n\ndf.tail()\n\n\ndf.sort_values(by='gdp')\n\n\ndf.sort_values(by='gdp', ascending=False)\n\n\ndf.sort_values('life_expectancy', ascending=False).head(10)\n\n\ndf.head(10).sort_values('life_expectancy', ascending=False)\n\n\ndf['life_expectancy']\n\n\ndf['life_expectancy'].median()\n\n\ndf['life_expectancy'] &gt; 75\n\n\ndf[df['life_expectancy'] &gt; 75]\n\n\ndf['continent'].value_counts()\n\n\ndf['continent'].unique()\n\n\ndf[df['continent'] == 'Europe']\n\n\ndf[df['continent'] == 'Europe'].sort_values(by='life_expectancy', ascending=False)\n\n\ndf[df['continent'] == 'Europe']['life_expectancy'].median()\n\n\ndf['life_expectancy'].describe()\n\n\ndf.groupby('continent')['life_expectancy'].median()\n\n\ndf.groupby('continent')['life_expectancy'].median().reset_index()\n\n\ndf.groupby('continent').agg({\n    'life_expectancy': 'median',\n    'gdp': 'max'\n})\n\n\n# Try to save this as a column??????\ndf['gdp_per_capita'] = df['gdp'] / df['population']\ndf.head(2)"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (completed).html#saving",
+    "href": "01-pandas/01 - Data analysis with pandas (completed).html#saving",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "When you save your CSV, you always need to include index=False. If you don’t, you get extra unnamed columns that are irritating to you and your coworkers!\n\ndf.to_csv(\"output.csv\", index=False)"
+  },
+  {
+    "objectID": "01-pandas/01 - Data analysis with pandas (completed).html#graphing",
+    "href": "01-pandas/01 - Data analysis with pandas (completed).html#graphing",
+    "title": "Data analysis basics with pandas",
+    "section": "",
+    "text": "There’s a good way to graph and a bad way to graph: the default is matplotlib, which is 100% the worst. A great alternative is Altair, which is more useful and produces prettier (and interactive!) graphics.\n\ndf.plot(x='gdp_per_capita', y='life_expectancy', kind='scatter')\n\n\nimport altair as alt\n\nalt.Chart(df).mark_circle(size=50).encode(\n    x='gdp_per_capita',\n    y='life_expectancy',\n    color='continent',\n    tooltip=['country', 'continent', 'life_expectancy', 'population']\n).properties(\n    width=800,\n    height=300\n).interactive()"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (incomplete).html",
+    "href": "01-pandas/02 - Using AI about AI (incomplete).html",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "",
+    "text": "Let’s see if we can use ChatGPT to walk us through how to do a complicated problem.\nIn April 2024, the Washington Post published Inside the secret list of websites that make AI like ChatGPT sound smart. This story analyzed the C4 dataset, a selection of data that’s part of the training process for large language models like ChatGPT.\nIt showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.\nLet’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.\n\nimport pandas as pd\npd.options.display.max_colwidth = 400\n\n# We're using a CSV right from the internet, but you can visit the URL if you'd like\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv\", nrows=3000)\ndf.head(10)"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (incomplete).html#now-that-we-know-a-little-python-using-ai-as-a-helper",
+    "href": "01-pandas/02 - Using AI about AI (incomplete).html#now-that-we-know-a-little-python-using-ai-as-a-helper",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "",
+    "text": "Let’s see if we can use ChatGPT to walk us through how to do a complicated problem.\nIn April 2024, the Washington Post published Inside the secret list of websites that make AI like ChatGPT sound smart. This story analyzed the C4 dataset, a selection of data that’s part of the training process for large language models like ChatGPT.\nIt showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.\nLet’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.\n\nimport pandas as pd\npd.options.display.max_colwidth = 400\n\n# We're using a CSV right from the internet, but you can visit the URL if you'd like\ndf = pd.read_csv(\"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv\", nrows=3000)\ndf.head(10)"
+  },
+  {
+    "objectID": "01-pandas/02 - Using AI about AI (incomplete).html#lets-get-crazy",
+    "href": "01-pandas/02 - Using AI about AI (incomplete).html#lets-get-crazy",
+    "title": "Now that we know a little Python: using AI as a helper",
+    "section": "Let’s get crazy",
+    "text": "Let’s get crazy\nWhat langage is each one of these in? Let’s get crazy by seeing what ChatGPT can help us do. This will be an exercise in asking specific questions, troubleshooting problems, and having a back-and-forth conversation with AI tools."
+  }
+]

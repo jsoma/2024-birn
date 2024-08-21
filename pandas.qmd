@@ -1,0 +1,102 @@
+# Data analysis with Python and pandas
+
+## Getting started
+
+Let's get started! First we need to figure out where we are going to run our code. We can do this on the **cloud** with Google Colab or we can do this **on our computer** with Jupyterlab Desktop. 
+
+Using the cloud is nice because you don't have to download anything or install anything, buuuuuuuut it's less realistic. In real life you would use your own computer.
+
+::: {.panel-tabset}
+
+### Google Colab
+
+If you want to use the cloud, you don't have to install anything! Just move on to the next step.
+
+### Jupyterlab Desktop 
+
+While running code in the cloud is nice and easy, most people end up doing their analysis on their own computers.
+
+First, download [Jupyterlab Desktop](https://github.com/Jupyterlab/Jupyterlab-desktop) by scrolling down to [the section on Installation](https://github.com/Jupyterlab/Jupyterlab-desktop?tab=readme-ov-file#installation) and download the correct version.
+
+Windows folks, download the **Windows version**. If you have an older mac, you want **x64 Installer (Intel chip)**. The **Apple silicon** version is for an M1, M2, or M3 mac.
+
+The startup instructions are ridiculous:
+
+> Jupyterlab Desktop can be launched from the GUI of your operating system by clicking the application's icon or by using jlab command from the command line. Double clicking .ipynb files is also supported and it will launch Jupyterlab Desktop and load the notebook file.
+
+*What?* Just open it like you would any other software:
+
+![Open up Jupyterlab Desktop](images/open-up.png)
+
+:::
+
+## Getting your code
+
+There are two options for the code: the **completed version** and the **fill-in-the-blanks** version.
+
+I think the fill-in-the-blanks one is more fun! The completed version doesn't have fun surprises, and you can always go back and look at it later.
+
+::: {.panel-tabset}
+
+### Google Colab
+
+Just click the version you'd like:
+
+* [The fill-in-the-blanks version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/01%20-%20Data%20analysis%20with%20pandas%20(incomplete).ipynb)
+* [The completed version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/01%20-%20Data%20analysis%20with%20pandas%20(completed).ipynb)
+
+### Jupyterlab Desktop 
+
+Download [this file](https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/pandas-content.zip) to get all of our notebooks and data files. You'll need to extract the files from the zip by either double-clicking or right-click + **Extract all**.
+
+Then open Jupyterlab Desktop and select the version you'd like. Use 'open' to find the `.ipynb` file you downloaded, and you'll be ready to go!
+
+![Open up Jupyterlab Desktop](images/open-notebook.png)
+
+One version is the **completed** version, the other one is **incomplete** and just waiting for us.
+
+:::
+
+## Running your code
+
+Each block of code is called a **cell**. You need to tell Python to "run" the cell in order to have the code do anything.
+
+Both Google Colab and Jupyterlab Desktop have a little play button you use to run code.
+
+::: {.panel-tabset}
+
+### Google Colab
+
+![Play button](images/play-Jupyterlab.png)
+
+### Jupyterlab Desktop
+
+![Play button](images/play-colab.png)
+
+:::
+
+## Graphing
+
+There are two ways to make graphics:
+
+1. With **matplotlib**, the worst thing on the planet
+2. With **Altair**, the best thing on the planet.
+
+I recommend using Altair! You can find [examples here](https://altair-viz.github.io/gallery/index.html).
+
+## Tips from your AI friends
+
+Now that you know how to run basic Python code, your world is infinitely larger! Try asking [ChatGPT](https://chatgpt.com) or [Claude](https://claude.ai/) about how to do something, and it can walk you through step-by-step.
+
+Need more explanation on what a line of code means, or how to run it in Jupyter? You now have the vocabulary to understand, and have a coherent back-and-forth with the chatbot!
+
+In the notebooks below we use AI to help perform some very very fancy analysis:
+
+* [The fill-in-the-blanks version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/02%20-%20Using%20AI%20about%20AI%20(incomplete).ipynb)
+* [The completed version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/02%20-%20Using%20AI%20about%20AI%20(completed).ipynb)
+
+If you'd prefer to use Jupyterlab Desktop, you can use [this file](https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/pandas-content.zip) to download of the content for this session, including the pandas walkthrough notebooks and the AI ones, too.
+
+## Other resources
+
+A great resource is Ben Welsh's [First Python Notebook](https://palewi.re/docs/first-python-notebook/index.html). It's like a longer version of what we did today!
