@@ -2,15 +2,20 @@
 
 ## Getting started
 
-Let's get started! First we need to figure out where we are going to run our code. We can do this on the **cloud** with Google Colab or we can do this **on our computer** with Jupyterlab Desktop. 
+Let's get started!
 
-Using the cloud is nice because you don't have to download anything or install anything, buuuuuuuut it's less realistic. In real life you would use your own computer.
+First we need to figure out where we are going to run our code. You have two options:
+
+- **On the cloud** with Google Colab
+- **On our computers** with Jupyterlab Desktop. 
+
+Using the cloud is nice because you don't have to download anything or install anything and there are fewer setup issues in general. But it's less realistic! In real life you would use your own computer. Either option is fine, and if Jupyterlab turns out to be difficult for you, you can always switch to Colab.
 
 ::: {.panel-tabset}
 
 ### Google Colab
 
-If you want to use the cloud, you don't have to install anything! Just move on to the next step.
+If you want to run your code using the cloud (Google Colab), you don't have to install anything! Just move on to the next step.
 
 ### Jupyterlab Desktop 
 
@@ -32,15 +37,17 @@ The startup instructions are ridiculous:
 
 ## Getting your code
 
-There are two options for the code: the **completed version** and the **fill-in-the-blanks** version.
+We run code in **notebooks**, which are the standard way that data scientists work on code. It allows you to go back and forth between analysis and writing notes, and your work becomes more like a "conversation."
 
-I think the fill-in-the-blanks one is more fun! The completed version doesn't have fun surprises, and you can always go back and look at it later.
+There are two options for this session's notebooks: the **completed versions** and the **fill-in-the-blanks versions**.
+
+I think the fill-in-the-blanks one is more fun! You'll type along with me, asking questions and learning as you go. The completed version doesn't have any fun surprises, but you get to sit back and relax. You can always from the incomplete one and copy/paste from the completed version later.
 
 ::: {.panel-tabset}
 
 ### Google Colab
 
-Just click the version you'd like:
+Just click the version you'd like and it will open up automatically:
 
 * [The fill-in-the-blanks version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/01%20-%20Data%20analysis%20with%20pandas%20(incomplete).ipynb)
 * [The completed version](https://colab.research.google.com/github/jsoma/2024-birn/blob/main/01-pandas/01%20-%20Data%20analysis%20with%20pandas%20(completed).ipynb)
@@ -49,11 +56,11 @@ Just click the version you'd like:
 
 Download [this file](https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/pandas-content.zip) to get all of our notebooks and data files. You'll need to extract the files from the zip by either double-clicking or right-click + **Extract all**.
 
-Then open Jupyterlab Desktop and select the version you'd like. Use 'open' to find the `.ipynb` file you downloaded, and you'll be ready to go!
+After you open Jupyterlab Desktop, use 'open' to find the `.ipynb` file you downloaded, and you'll be ready to go! 
 
 ![Open up Jupyterlab Desktop](images/open-notebook.png)
 
-One version is the **completed** version, the other one is **incomplete** and just waiting for us.
+There are two versions of the notebooks: pick the incomplete, fill-in-the-blanks version if you'd like a little adventure or the completed version if you'd like to relax.
 
 :::
 
