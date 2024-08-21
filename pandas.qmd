@@ -33,6 +33,8 @@ The startup instructions are ridiculous:
 
 ![Open up Jupyterlab Desktop](images/open-up.png)
 
+Once it's open, move on to the next step.
+
 :::
 
 ## Getting your code
