@@ -1,3 +1,7 @@
+::: {.callout-tip appearance="simple"}
+Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
+:::
+
 # BIRN Summer School 2024
 
 Hi, I'm [Soma](https://twitter.com/dangerscarf)! This is everything I presented at the BIRN Summer School in 2024. So far you can see:
