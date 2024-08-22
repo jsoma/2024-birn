@@ -19,6 +19,10 @@ get_ipython().kernel.do_shutdown(restart=True)
 
 ChatGPT doesn't always remind you to use it, but be sure to put it in the first cell!
 
+## An example?
+
+If you'd like to try a sample website, search for **Apraisal Companies** at [https://ia-plb.my.site.com/LicenseSearchPage](https://ia-plb.my.site.com/LicenseSearchPage)
+
 ## Copy and paste the prompt below
 
 <pre>
@@ -36,7 +40,7 @@ If there is a form that needs to be filled out, you may need to get the HTML for
 
 To confirm columns details, walk me through how to copy the outer HTML of one "row" of data. I'm new to scraping and might need help. Decide on columns to be saved, then confirm them with me. If it isn't clear, explain what you need from me.
 
-Help me determine the pagination situation. Are there multiple pages of content? Is there a 'next page' button that can be pressed again and again? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.
+Help me determine the pagination situation. Are there multiple pages of content? Is there a 'next page' button that can be pressed again and again? Do you need to click an incrementing number of pages? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.
 
 ## Important Notes: 
 

@@ -80,3 +80,5 @@ To get the HTML code for part of the page, first find it using the Web Inspector
 ## Writing your scraper
 
 Use [this custom prompt](prompt.qmd) to see if you can put together a scraper! We'll walk through it several times in class.
+
+Our example we'll use is **Apraisal Companies** from [https://ia-plb.my.site.com/LicenseSearchPage](https://ia-plb.my.site.com/LicenseSearchPage)
