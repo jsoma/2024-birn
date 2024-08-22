@@ -199,7 +199,7 @@ Proceed in several steps, one at a time. Do not proceed to the next step until y
 4. Confirm pagination details
 5. Write the guide
 
-If there is a form that needs to be filled out, you may need to get the HTML for the entire form or parts of the form. If necessary a similar walkthrough as below to understand the HTML. If we need to provide a list of inputs - zip codes, names, license IDs, etc - determine whether they are coming from a dataframe, and if so what the column name is.
+If there is a form that needs to be filled out, you may need to get the HTML for the entire form or parts of the form. If necessary a similar walkthrough as below to understand the HTML. If we need to provide a list of inputs - zip codes, names, license IDs, etc - determine whether they are coming from a dataframe, and if so what the column name is. Be sure you know how to submit the form.
 
 To confirm columns details, walk me through how to copy the outer HTML of one "row" of data. I'm new to scraping and might need help. Decide on columns to be saved, then confirm them with me. If it isn't clear, explain what you need from me.
 
@@ -243,7 +243,7 @@ browser = await playwright.chromium.launch(headless=False)
 
 # Create a new browser window
 page = await browser.new_page()
-await page.goto("https://ia-plb.my.site.com/LicenseSearchPage")
+await page.goto("https://newjersey.mylicense.com/verification/Search.aspx")
 ```
 
 ## Selecting an option from a dropdown
@@ -251,10 +251,15 @@ await page.goto("https://ia-plb.my.site.com/LicenseSearchPage")
 You always start with await page.locator("select").select_option("whatever option you want"). You'll probably get an error because there are multiple dropdowns on the page, but Playwright doesn't know which one you want to use! Just read the error and figure out the right one.
 
 ```
-# await page.locator("select").select_option("Appraisal Management Company")
-await page.get_by_label("Licensing Board:").select_option("Appraisal Management Company")
+# await page.locator("select").select_option("Acupuncture")
+await page.locator("#t_web_lookup__profession_name").select_option("Perfusionist")
+```
+
+Click the submit button.
+
+```
 # await page.get_by_text("Search").click()
-await page.locator("input[name=\"j_id0\\:j_id1\\:j_id14\\:j_id73\"]").click()
+await page.get_by_role("button", name="Search").click()
 ```
 
 ## Grab the tables from the page
