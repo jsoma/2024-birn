@@ -2,3 +2,19 @@ div.cell-output.cell-output-stdout pre {
     background: #ffe3e3;
     padding: 0.4em;
 }
+
+video {
+    max-width: 100%;
+}
+
+img.img-fluid {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    text-align: center;
+    font-style: normal;
+    font-size: 0.8em;
+}

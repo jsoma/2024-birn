@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper</title>
+<title>BIRN Summer School 2024 - Our scraping prompt</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,59 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./scraping.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,8 +69,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../static/style.css">
-<meta name="twitter:title" content="BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper">
+<link rel="stylesheet" href="static/style.css">
+<meta name="twitter:title" content="BIRN Summer School 2024 - Our scraping prompt">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@dangerscarf">
 <meta name="twitter:card" content="summary">
@@ -116,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">BIRN Summer School 2024</span>
     </a>
   </div>
@@ -130,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Now that we know a little Python: using AI as a helper</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prompt.html">Scraping prompt</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,25 +119,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pandas.html" class="sidebar-item-text sidebar-link">
+  <a href="./pandas.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data analysis with python/pandas</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scraping.html" class="sidebar-item-text sidebar-link">
+  <a href="./scraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scraping with Python</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prompt.html" class="sidebar-item-text sidebar-link">
+  <a href="./prompt.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Scraping prompt</span></a>
   </div>
 </li>
@@ -185,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Now that we know a little Python: using AI as a helper</h1>
+<h1 class="title">Our scraping prompt</h1>
 </div>
 
 
@@ -202,24 +169,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="now-that-we-know-a-little-python-using-ai-as-a-helper" class="level2">
-<h2 class="anchored" data-anchor-id="now-that-we-know-a-little-python-using-ai-as-a-helper">Now that we know a little Python: using AI as a helper</h2>
-<p>Let’s see if we can use <a href="https://chat.openai.com/">ChatGPT</a> to walk us through how to do a complicated problem.</p>
-<p>In April 2024, the Washington Post published <a href="https://www.washingtonpost.com/technology/interactive/2023/ai-chatbot-learning/">Inside the secret list of websites that make AI like ChatGPT sound smart</a>. This story analyzed the <a href="https://huggingface.co/datasets/allenai/c4">C4 dataset</a>, a selection of data that’s part of the training process for large language models like ChatGPT.</p>
-<p>It showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.</p>
-<p>Let’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.</p>
-<div id="107ecf2d-a154-4ab9-8feb-df184f82c0f8" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.options.display.max_colwidth <span class="op">=</span> <span class="dv">400</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We're using a CSV right from the internet, but you can visit the URL if you'd like</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv"</span>, nrows<span class="op">=</span><span class="dv">3000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-body-container">
+<p>Find this page at <a href="https://bit.ly/birn-data">bit.ly/birn-data</a></p>
+</div>
+</div>
+</div>
+<p>Try this prompt in <a href="https://chatgpt.com/">ChatGPT</a> or <a href="https://claude.ai/">Claude</a> to put together a scraper!</p>
+<section id="copy-and-paste-the-prompt-below" class="level2">
+<h2 class="anchored" data-anchor-id="copy-and-paste-the-prompt-below">Copy and paste the prompt below</h2>
+<p>I have the following guide about scraping a website. Please adapt it to be for how to scrape a different website.</p>
+<p>Proceed in several steps, one at a time. Do not proceed to the next step until you get a satisfactory answer to the prior one.</p>
+<ol type="1">
+<li>Ask what the URL is</li>
+<li>Ask if there are any forms or fields to be filled out. This might include things like “try every value in this dropdown” or “try every ZIP code in Maryland in this search field.”</li>
+<li>Confirm the columns for the final dataset</li>
+<li>Confirm pagination details</li>
+<li>Write the guide</li>
+</ol>
+<p>If there is a form that needs to be filled out, you may need to get the HTML for the entire form or parts of the form. If necessary a similar walkthrough as below to understand the HTML. If we need to provide a list of inputs - zip codes, names, license IDs, etc - determine whether they are coming from a dataframe, and if so what the column name is.</p>
+<p>To confirm columns details, walk me through how to copy the outer HTML of one “row” of data. I’m new to scraping and might need help. Decide on columns to be saved, then confirm them with me. If it isn’t clear, explain what you need from me.</p>
+<p>Help me determine the pagination situation. Are there multiple pages of content? Is there a ‘next page’ button that can be pressed again and again? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.</p>
+<p>Notes: - You MUST use async playwright - Do NOT use asyncio and do NOT wrap everything in an async function. - If displaying a dataframe, do NOT use print or ace_tools, just use df.head() - The sample tutorial reads a table with pd.read_html. If there is no table on the page, this is not possible and you must use the ‘normal’ selector process. - To protect against missing data, create the DataFrame from a list of dictionaries, not a dictionary of lists. Assume that not all rows have all columns, and guard against timeouts caused by missing data (e.g.&nbsp;some elements might not have a description). - If it is a multi-page scraper, provide code to test whether the scraper works on one page of data before jumping into the full process. Ask whether I am satisfied with the result before proceeding. - Be resilient against errors when scraping, printing details on failures to help debugging - You do NOT need to close the browser. We can figure that out ourselves. - Provide complete code - The site might be slow or I might have bad internet, set all timeouts to be 10 seconds at a minimum</p>
+<p>GUIDE:</p>
 </section>
-<section id="lets-get-crazy" class="level2">
-<h2 class="anchored" data-anchor-id="lets-get-crazy">Let’s get crazy</h2>
-<p>What langage is each one of these in? Let’s get crazy by <a href="https://chatgpt.com/">seeing what ChatGPT can help us do</a>. This will be an exercise in asking specific questions, troubleshooting problems, and having a back-and-forth conversation with AI tools.</p>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>Windows and Playwright don’t get along very well, so first we’ll use this code to install a <em>very specific version</em> of some software to make things work.</p>
+<pre><code>%pip install --quiet "ipykernel==6.28.0"
+get_ipython().kernel.do_shutdown(restart=True)</code></pre>
+<p>We also need to install a few tools first! Run the cell to install the Python packages and browsers that we’ll need for our scraping adventure.</p>
+<pre><code>%pip install lxml html5lib beautifulsoup4 pandas
+%pip install --quiet playwright
+!playwright install</code></pre>
+</section>
+<section id="opening-up-the-browser-and-visiting-our-destination" class="level2">
+<h2 class="anchored" data-anchor-id="opening-up-the-browser-and-visiting-our-destination">Opening up the browser and visiting our destination</h2>
+<pre><code>from playwright.async_api import async_playwright
+
+# "Hey, open up a browser"
+playwright = await async_playwright().start()
+browser = await playwright.chromium.launch(headless=False)
+
+# Create a new browser window
+page = await browser.new_page()
+await page.goto("https://ia-plb.my.site.com/LicenseSearchPage")</code></pre>
+</section>
+<section id="selecting-an-option-from-a-dropdown" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-an-option-from-a-dropdown">Selecting an option from a dropdown</h2>
+<p>You always start with await page.locator(“select”).select_option(“whatever option you want”). You’ll probably get an error because there are multiple dropdowns on the page, but Playwright doesn’t know which one you want to use! Just read the error and figure out the right one.</p>
+<pre><code># await page.locator("select").select_option("Appraisal Management Company")
+await page.get_by_label("Licensing Board:").select_option("Appraisal Management Company")
+# await page.get_by_text("Search").click()
+await page.locator("input[name=\"j_id0\\:j_id1\\:j_id14\\:j_id73\"]").click()</code></pre>
+</section>
+<section id="grab-the-tables-from-the-page" class="level2">
+<h2 class="anchored" data-anchor-id="grab-the-tables-from-the-page">Grab the tables from the page</h2>
+<p>Pandas is the Python equivalent to Excel, and it’s great at dealing with tabular data! Often the data on a web page that looks like a spreadsheet can be read with pd.read_html.</p>
+<p>You use await page.content() to save the contents of the page, then feed it to read_html to find the tables. len(tables) checks the number of tables you have, then you manually poke around to see which one is the one you’re interested in. tables[0] is the first one, tables[1] is the second one, and so on…</p>
+<pre><code>import pandas as pd
+from io import StringIO
+
+html = await page.content()
+tables = pd.read_html(StringIO(html))
+len(tables)
+tables[0]</code></pre>
+</section>
+<section id="clicking-next-page-one" class="level2">
+<h2 class="anchored" data-anchor-id="clicking-next-page-one">Clicking “next page” one</h2>
+<p>Just like using a dropdown, select box or button, we’ll use page.get_by_text to try to select the button.</p>
+<p>We add timeout=10000 to wait 5 seconds before confirming it isn’t there.</p>
+<pre><code># page.get_by_text("Next Page").click()
+await page.locator("a:has-text('Next Page')").click(timeout=10000)</code></pre>
+</section>
+<section id="clicking-next-page-until-it-disappears" class="level2">
+<h2 class="anchored" data-anchor-id="clicking-next-page-until-it-disappears">Clicking “next page” until it disappears</h2>
+<p>Eventually the “next page” link disappears, and Python starts screaming. We use try/except down below to say “don’t worry little baby, it’s okay, we’ll just finish up if the button is gone.”</p>
+<pre><code># all of our data will end up going here
+all_data = pd.DataFrame()
+
+while True:
+    await page.wait_for_selector("table")
+
+    # Get all of the tables on the page
+    html = await page.content()
+    tables = pd.read_html(StringIO(html))
+
+    # Get the table (and edit if necessary)
+    df = tables[0]
+
+    # Add the tables on this page to the big list of stuff
+    all_data = pd.concat([all_data, df], ignore_index = True)
+    try:
+        await page.locator("a:has-text('Next Page')").click(timeout=5000)
+    except:
+        break
+all_data</code></pre>
+</section>
+<section id="saving-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="saving-the-results">Saving the results</h2>
+<p>Now we’ll save it to a CSV file! Easy peasy.</p>
+<pre><code>all_data.to_csv("output.csv", index=False)</code></pre>
+<p>```</p>
 
 
 </section>
@@ -612,6 +667,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./scraping.html" class="pagination-link" aria-label="Scraping with Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Scraping with Python</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -620,7 +684,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>©2024, Jonathan Soma</p>
-<div class="toc-actions"><ul><li><a href="https://github.dev/jsoma/2024-birn/blob/main/01-pandas/02 - Using AI about AI (incomplete).ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/jsoma/2024-birn/edit/main/prompt.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

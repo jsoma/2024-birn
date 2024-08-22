@@ -1,8 +1,10 @@
+---
+title: Data analysis with Python and pandas
+---
+
 ::: {.callout-tip appearance="simple"}
 Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
 :::
-
-# Data analysis with Python and pandas
 
 ## Getting started
 

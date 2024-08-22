@@ -1,0 +1,82 @@
+---
+title: Scraping with Python and Playwright
+format:
+  html:
+    toc: true
+---
+
+::: {.callout-tip appearance="simple"}
+Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
+:::
+
+## Getting started
+
+Let's get started!
+
+When we learned to do [data analysis in Python](pandas.qmd), it was possible to skip setup and run all of our code in the cloud. But not this time! You'll need to install **Jupyterlab Desktop** on your computer.
+
+First, download [Jupyterlab Desktop](https://github.com/Jupyterlab/Jupyterlab-desktop) by scrolling down to [the section on Installation](https://github.com/Jupyterlab/Jupyterlab-desktop?tab=readme-ov-file#installation) and download the correct version.
+
+Windows folks, download the **Windows version**. If you have an older mac, you want **x64 Installer (Intel chip)**. The **Apple silicon** version is for an M1, M2, or M3 mac.
+
+The startup instructions are ridiculous:
+
+> Jupyterlab Desktop can be launched from the GUI of your operating system by clicking the application's icon or by using jlab command from the command line. Double clicking .ipynb files is also supported and it will launch Jupyterlab Desktop and load the notebook file.
+
+*What?* Just open it like you would any other software:
+
+![Open up Jupyterlab Desktop](images/open-up.png)
+
+Once it's open, move on to the next step.
+
+### Creating a new notebook
+
+When data scientists program in Python, they use **notebooks**. To create a new notebook, click the **New Session** link in Jupyterlab, then **Python 3** under Notebook.
+
+> Your Jupyterlab Desktop might take some time to finish installing! It needs to download Python and set some things up. Give it some time to complete the process after you open it.
+
+![New session](images/new-session.png)
+
+![New notebook](images/new-notebook.png)
+
+### Running code
+
+To give your code a try, type the following Python code and press the play ▶️ button.
+
+```py
+print("Hello")
+```
+
+## Inspecting our pages
+
+### Opening the web inspector
+
+Right-click (or command-click) to bring up the menu, then select **Inspect**. It might be slightly different if you aren't using Chrome!
+
+![](images/click-inspect.png)
+
+### Using the web inspector
+
+Move your mouse around on the code on the right.
+
+<video autoplay muted loop>
+  <source src="images/selecting-resized.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+Or click the 'select' button and click what you are interested in
+
+<video autoplay muted loop>
+  <source src="images/selecting-2-resized.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### Getting the code
+
+To get the HTML code for part of the page, first find it using the Web Inspector. Then right click, Copy, Copy outerHTML. You can paste this into ChatGPT to help write your scraper.
+
+![](images/select-outerhtml.png)
+
+## Writing your scraper
+
+Use [this custom prompt](prompt.qmd) to see if you can put together a scraper! We'll walk through it several times in class.

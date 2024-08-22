@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper</title>
+<title>BIRN Summer School 2024 - Data analysis basics with pandas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,8 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../static/style.css">
-<meta name="twitter:title" content="BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="BIRN Summer School 2024 - Data analysis basics with pandas">
 <meta name="twitter:creator" content="@dangerscarf">
 <meta name="twitter:card" content="summary">
 </head>
@@ -130,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Now that we know a little Python: using AI as a helper</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data analysis basics with pandas</li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -185,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Now that we know a little Python: using AI as a helper</h1>
+<h1 class="title">Data analysis basics with pandas</h1>
 </div>
 
 
@@ -202,26 +201,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="now-that-we-know-a-little-python-using-ai-as-a-helper" class="level2">
-<h2 class="anchored" data-anchor-id="now-that-we-know-a-little-python-using-ai-as-a-helper">Now that we know a little Python: using AI as a helper</h2>
-<p>Let’s see if we can use <a href="https://chat.openai.com/">ChatGPT</a> to walk us through how to do a complicated problem.</p>
-<p>In April 2024, the Washington Post published <a href="https://www.washingtonpost.com/technology/interactive/2023/ai-chatbot-learning/">Inside the secret list of websites that make AI like ChatGPT sound smart</a>. This story analyzed the <a href="https://huggingface.co/datasets/allenai/c4">C4 dataset</a>, a selection of data that’s part of the training process for large language models like ChatGPT.</p>
-<p>It showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.</p>
-<p>Let’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.</p>
-<div id="107ecf2d-a154-4ab9-8feb-df184f82c0f8" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.options.display.max_colwidth <span class="op">=</span> <span class="dv">400</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We're using a CSV right from the internet, but you can visit the URL if you'd like</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv"</span>, nrows<span class="op">=</span><span class="dv">3000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="data-analysis-basics-with-pandas" class="level1">
+<h1>Data analysis basics with pandas</h1>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>Even though we have Python installed, we still need to install some extra pieces of software! Python is a whole ecosystem of content, where many of the best abilities are from packages/libraries/modules that are made by other people or companies.</p>
+<div id="809881f7-aac6-4439-858a-b7102db80d55" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">--</span>quiet pandas altair lxml tqdm requests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[notice] A new release of pip is available: 23.0.1 -&gt; 24.2
+[notice] To update, run: pip install --upgrade pip
+Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
 </div>
 </section>
-<section id="lets-get-crazy" class="level2">
-<h2 class="anchored" data-anchor-id="lets-get-crazy">Let’s get crazy</h2>
-<p>What langage is each one of these in? Let’s get crazy by <a href="https://chatgpt.com/">seeing what ChatGPT can help us do</a>. This will be an exercise in asking specific questions, troubleshooting problems, and having a back-and-forth conversation with AI tools.</p>
+<section id="using-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="using-pandas">Using pandas</h2>
+<p>To use pandas, we first need to <strong>import it</strong>. Then we can go ahead with reading in our data and analyzing it.</p>
+<div id="d5829cf1-c9f4-43b2-bbe9-9d7320e22eb4" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a "dataframe" - the Python version of a spreadsheet</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We're using a CSV right from the internet, but you can also use it on your own computer</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/countries.csv"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="saving" class="level2">
+<h2 class="anchored" data-anchor-id="saving">Saving</h2>
+<p>When you save your CSV, you always need to include <code>index=False</code>. If you don’t, you get extra unnamed columns that are irritating to you and your coworkers!</p>
+</section>
+<section id="graphing" class="level2">
+<h2 class="anchored" data-anchor-id="graphing">Graphing</h2>
+<p>There’s a good way to graph and a bad way to graph: the default is <a href="https://matplotlib.org/">matplotlib</a>, which is 100% the worst. A great alternative is <a href="https://altair-viz.github.io/gallery/index.html">Altair</a>, which is more useful and produces prettier (and interactive!) graphics.</p>
+<div id="9a6bfd06-678c-4649-9f6d-f15db0062506" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.plot(x<span class="op">=</span><span class="st">'gdp_per_capita'</span>, y<span class="op">=</span><span class="st">'life_expectancy'</span>, kind<span class="op">=</span><span class="st">'scatter'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="04163812-640f-4046-b03e-cf06e9454bb1" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_circle(size<span class="op">=</span><span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -620,7 +644,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>©2024, Jonathan Soma</p>
-<div class="toc-actions"><ul><li><a href="https://github.dev/jsoma/2024-birn/blob/main/01-pandas/02 - Using AI about AI (incomplete).ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.dev/jsoma/2024-birn/blob/main/01-pandas/01 - Data analysis with pandas (inclass).ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

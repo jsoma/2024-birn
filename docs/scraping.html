@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper</title>
+<title>BIRN Summer School 2024 - Scraping with Python and Playwright</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prompt.html" rel="next">
+<link href="./pandas.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,21 +104,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../static/style.css">
-<meta name="twitter:title" content="BIRN Summer School 2024 - Now that we know a little Python: using AI as a helper">
+<link rel="stylesheet" href="static/style.css">
+<meta name="twitter:title" content="BIRN Summer School 2024 - Scraping with Python and Playwright">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@dangerscarf">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">BIRN Summer School 2024</span>
     </a>
   </div>
@@ -130,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Now that we know a little Python: using AI as a helper</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./scraping.html">Scraping with Python</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,25 +154,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pandas.html" class="sidebar-item-text sidebar-link">
+  <a href="./pandas.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data analysis with python/pandas</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scraping.html" class="sidebar-item-text sidebar-link">
+  <a href="./scraping.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Scraping with Python</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../prompt.html" class="sidebar-item-text sidebar-link">
+  <a href="./prompt.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scraping prompt</span></a>
   </div>
 </li>
@@ -179,13 +181,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-new-notebook" id="toc-creating-a-new-notebook" class="nav-link" data-scroll-target="#creating-a-new-notebook">Creating a new notebook</a></li>
+  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running code</a></li>
+  </ul></li>
+  <li><a href="#inspecting-our-pages" id="toc-inspecting-our-pages" class="nav-link" data-scroll-target="#inspecting-our-pages">Inspecting our pages</a>
+  <ul class="collapse">
+  <li><a href="#opening-the-web-inspector" id="toc-opening-the-web-inspector" class="nav-link" data-scroll-target="#opening-the-web-inspector">Opening the web inspector</a></li>
+  <li><a href="#using-the-web-inspector" id="toc-using-the-web-inspector" class="nav-link" data-scroll-target="#using-the-web-inspector">Using the web inspector</a></li>
+  <li><a href="#getting-the-code" id="toc-getting-the-code" class="nav-link" data-scroll-target="#getting-the-code">Getting the code</a></li>
+  </ul></li>
+  <li><a href="#writing-your-scraper" id="toc-writing-your-scraper" class="nav-link" data-scroll-target="#writing-your-scraper">Writing your scraper</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jsoma/2024-birn/edit/main/scraping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Now that we know a little Python: using AI as a helper</h1>
+<h1 class="title">Scraping with Python and Playwright</h1>
 </div>
 
 
@@ -202,24 +223,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="now-that-we-know-a-little-python-using-ai-as-a-helper" class="level2">
-<h2 class="anchored" data-anchor-id="now-that-we-know-a-little-python-using-ai-as-a-helper">Now that we know a little Python: using AI as a helper</h2>
-<p>Let’s see if we can use <a href="https://chat.openai.com/">ChatGPT</a> to walk us through how to do a complicated problem.</p>
-<p>In April 2024, the Washington Post published <a href="https://www.washingtonpost.com/technology/interactive/2023/ai-chatbot-learning/">Inside the secret list of websites that make AI like ChatGPT sound smart</a>. This story analyzed the <a href="https://huggingface.co/datasets/allenai/c4">C4 dataset</a>, a selection of data that’s part of the training process for large language models like ChatGPT.</p>
-<p>It showed how much content was from Wikipedia, whether business or hobby websites were more popular, and even included a tool that allowed you to search whether your website was included in the dataset.</p>
-<p>Let’s see if we can do our own analysis! We’re going to use the C4M dataset, which is the multilingual version.</p>
-<div id="107ecf2d-a154-4ab9-8feb-df184f82c0f8" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.options.display.max_colwidth <span class="op">=</span> <span class="dv">400</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We're using a CSV right from the internet, but you can visit the URL if you'd like</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/jsoma/2024-birn/main/01-pandas/c4m-tiny-sample.csv"</span>, nrows<span class="op">=</span><span class="dv">3000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Find this page at <a href="https://bit.ly/birn-data">bit.ly/birn-data</a></p>
+</div>
+</div>
+</div>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<p>Let’s get started!</p>
+<p>When we learned to do <a href="./pandas.html">data analysis in Python</a>, it was possible to skip setup and run all of our code in the cloud. But not this time! You’ll need to install <strong>Jupyterlab Desktop</strong> on your computer.</p>
+<p>First, download <a href="https://github.com/Jupyterlab/Jupyterlab-desktop">Jupyterlab Desktop</a> by scrolling down to <a href="https://github.com/Jupyterlab/Jupyterlab-desktop?tab=readme-ov-file#installation">the section on Installation</a> and download the correct version.</p>
+<p>Windows folks, download the <strong>Windows version</strong>. If you have an older mac, you want <strong>x64 Installer (Intel chip)</strong>. The <strong>Apple silicon</strong> version is for an M1, M2, or M3 mac.</p>
+<p>The startup instructions are ridiculous:</p>
+<blockquote class="blockquote">
+<p>Jupyterlab Desktop can be launched from the GUI of your operating system by clicking the application’s icon or by using jlab command from the command line. Double clicking .ipynb files is also supported and it will launch Jupyterlab Desktop and load the notebook file.</p>
+</blockquote>
+<p><em>What?</em> Just open it like you would any other software:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/open-up.png" class="img-fluid figure-img"></p>
+<figcaption>Open up Jupyterlab Desktop</figcaption>
+</figure>
+</div>
+<p>Once it’s open, move on to the next step.</p>
+<section id="creating-a-new-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-new-notebook">Creating a new notebook</h3>
+<p>When data scientists program in Python, they use <strong>notebooks</strong>. To create a new notebook, click the <strong>New Session</strong> link in Jupyterlab, then <strong>Python 3</strong> under Notebook.</p>
+<blockquote class="blockquote">
+<p>Your Jupyterlab Desktop might take some time to finish installing! It needs to download Python and set some things up. Give it some time to complete the process after you open it.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/new-session.png" class="img-fluid figure-img"></p>
+<figcaption>New session</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/new-notebook.png" class="img-fluid figure-img"></p>
+<figcaption>New notebook</figcaption>
+</figure>
 </div>
 </section>
-<section id="lets-get-crazy" class="level2">
-<h2 class="anchored" data-anchor-id="lets-get-crazy">Let’s get crazy</h2>
-<p>What langage is each one of these in? Let’s get crazy by <a href="https://chatgpt.com/">seeing what ChatGPT can help us do</a>. This will be an exercise in asking specific questions, troubleshooting problems, and having a back-and-forth conversation with AI tools.</p>
+<section id="running-code" class="level3">
+<h3 class="anchored" data-anchor-id="running-code">Running code</h3>
+<p>To give your code a try, type the following Python code and press the play ▶️ button.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="inspecting-our-pages" class="level2">
+<h2 class="anchored" data-anchor-id="inspecting-our-pages">Inspecting our pages</h2>
+<section id="opening-the-web-inspector" class="level3">
+<h3 class="anchored" data-anchor-id="opening-the-web-inspector">Opening the web inspector</h3>
+<p>Right-click (or command-click) to bring up the menu, then select <strong>Inspect</strong>. It might be slightly different if you aren’t using Chrome!</p>
+<p><img src="images/click-inspect.png" class="img-fluid"></p>
+</section>
+<section id="using-the-web-inspector" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-web-inspector">Using the web inspector</h3>
+<p>Move your mouse around on the code on the right.</p>
+<video autoplay="" muted="" loop="">
+<source src="images/selecting-resized.mov" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+<p>Or click the ‘select’ button and click what you are interested in</p>
+<video autoplay="" muted="" loop="">
+<source src="images/selecting-2-resized.mov" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+</video></video></section>
+<section id="getting-the-code" class="level3">
+<h3 class="anchored" data-anchor-id="getting-the-code">Getting the code</h3>
+<p>To get the HTML code for part of the page, first find it using the Web Inspector. Then right click, Copy, Copy outerHTML. You can paste this into ChatGPT to help write your scraper.</p>
+<p><img src="images/select-outerhtml.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="writing-your-scraper" class="level2">
+<h2 class="anchored" data-anchor-id="writing-your-scraper">Writing your scraper</h2>
+<p>Use <a href="./prompt.html">this custom prompt</a> to see if you can put together a scraper! We’ll walk through it several times in class.</p>
 
 
 </section>
@@ -612,6 +695,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./pandas.html" class="pagination-link" aria-label="Data analysis with python/pandas">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data analysis with python/pandas</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prompt.html" class="pagination-link" aria-label="Scraping prompt">
+        <span class="nav-page-text">Scraping prompt</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -620,7 +715,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>©2024, Jonathan Soma</p>
-<div class="toc-actions"><ul><li><a href="https://github.dev/jsoma/2024-birn/blob/main/01-pandas/02 - Using AI about AI (incomplete).ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jsoma/2024-birn/edit/main/scraping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jsoma/2024-birn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
