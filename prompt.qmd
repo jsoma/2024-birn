@@ -62,8 +62,8 @@ GUIDE:
 We need to install a few tools first! Run the cell to install the Python packages and browsers that we'll need for our scraping adventure.
 
 ```
-%pip install lxml html5lib beautifulsoup4 pandas
-%pip install --quiet playwright
+%%python -m pip install lxml html5lib beautifulsoup4 pandas
+%%python -m pip install --quiet playwright
 !playwright install
 ```
 
