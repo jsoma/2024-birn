@@ -101,81 +101,21 @@
     ]
   },
   {
+    "objectID": "prompt.html#but-first-windows-people",
+    "href": "prompt.html#but-first-windows-people",
+    "title": "Our scraping prompt",
+    "section": "But first: WINDOWS PEOPLE",
+    "text": "But first: WINDOWS PEOPLE\nWindows and Playwright don’t get along very well, so first we’ll use this code to install a very specific version of some software to make things work.\n%pip install --quiet \"ipykernel==6.28.0\"\nget_ipython().kernel.do_shutdown(restart=True)\nChatGPT doesn’t always remind you to use it, but be sure to put it in the first cell!",
+    "crumbs": [
+      "Scraping prompt"
+    ]
+  },
+  {
     "objectID": "prompt.html#copy-and-paste-the-prompt-below",
     "href": "prompt.html#copy-and-paste-the-prompt-below",
     "title": "Our scraping prompt",
     "section": "Copy and paste the prompt below",
-    "text": "Copy and paste the prompt below\nI have the following guide about scraping a website. Please adapt it to be for how to scrape a different website.\nProceed in several steps, one at a time. Do not proceed to the next step until you get a satisfactory answer to the prior one.\n\nAsk what the URL is\nAsk if there are any forms or fields to be filled out. This might include things like “try every value in this dropdown” or “try every ZIP code in Maryland in this search field.”\nConfirm the columns for the final dataset\nConfirm pagination details\nWrite the guide\n\nIf there is a form that needs to be filled out, you may need to get the HTML for the entire form or parts of the form. If necessary a similar walkthrough as below to understand the HTML. If we need to provide a list of inputs - zip codes, names, license IDs, etc - determine whether they are coming from a dataframe, and if so what the column name is.\nTo confirm columns details, walk me through how to copy the outer HTML of one “row” of data. I’m new to scraping and might need help. Decide on columns to be saved, then confirm them with me. If it isn’t clear, explain what you need from me.\nHelp me determine the pagination situation. Are there multiple pages of content? Is there a ‘next page’ button that can be pressed again and again? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.\nNotes: - You MUST use async playwright - Do NOT use asyncio and do NOT wrap everything in an async function. - If displaying a dataframe, do NOT use print or ace_tools, just use df.head() - The sample tutorial reads a table with pd.read_html. If there is no table on the page, this is not possible and you must use the ‘normal’ selector process. - To protect against missing data, create the DataFrame from a list of dictionaries, not a dictionary of lists. Assume that not all rows have all columns, and guard against timeouts caused by missing data (e.g. some elements might not have a description). - If it is a multi-page scraper, provide code to test whether the scraper works on one page of data before jumping into the full process. Ask whether I am satisfied with the result before proceeding. - Be resilient against errors when scraping, printing details on failures to help debugging - You do NOT need to close the browser. We can figure that out ourselves. - Provide complete code - The site might be slow or I might have bad internet, set all timeouts to be 10 seconds at a minimum\nGUIDE:",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#installation",
-    "href": "prompt.html#installation",
-    "title": "Our scraping prompt",
-    "section": "Installation",
-    "text": "Installation\nWindows and Playwright don’t get along very well, so first we’ll use this code to install a very specific version of some software to make things work.\n%pip install --quiet \"ipykernel==6.28.0\"\nget_ipython().kernel.do_shutdown(restart=True)\nWe also need to install a few tools first! Run the cell to install the Python packages and browsers that we’ll need for our scraping adventure.\n%pip install lxml html5lib beautifulsoup4 pandas\n%pip install --quiet playwright\n!playwright install",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#opening-up-the-browser-and-visiting-our-destination",
-    "href": "prompt.html#opening-up-the-browser-and-visiting-our-destination",
-    "title": "Our scraping prompt",
-    "section": "Opening up the browser and visiting our destination",
-    "text": "Opening up the browser and visiting our destination\nfrom playwright.async_api import async_playwright\n\n# \"Hey, open up a browser\"\nplaywright = await async_playwright().start()\nbrowser = await playwright.chromium.launch(headless=False)\n\n# Create a new browser window\npage = await browser.new_page()\nawait page.goto(\"https://ia-plb.my.site.com/LicenseSearchPage\")",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#selecting-an-option-from-a-dropdown",
-    "href": "prompt.html#selecting-an-option-from-a-dropdown",
-    "title": "Our scraping prompt",
-    "section": "Selecting an option from a dropdown",
-    "text": "Selecting an option from a dropdown\nYou always start with await page.locator(“select”).select_option(“whatever option you want”). You’ll probably get an error because there are multiple dropdowns on the page, but Playwright doesn’t know which one you want to use! Just read the error and figure out the right one.\n# await page.locator(\"select\").select_option(\"Appraisal Management Company\")\nawait page.get_by_label(\"Licensing Board:\").select_option(\"Appraisal Management Company\")\n# await page.get_by_text(\"Search\").click()\nawait page.locator(\"input[name=\\\"j_id0\\\\:j_id1\\\\:j_id14\\\\:j_id73\\\"]\").click()",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#grab-the-tables-from-the-page",
-    "href": "prompt.html#grab-the-tables-from-the-page",
-    "title": "Our scraping prompt",
-    "section": "Grab the tables from the page",
-    "text": "Grab the tables from the page\nPandas is the Python equivalent to Excel, and it’s great at dealing with tabular data! Often the data on a web page that looks like a spreadsheet can be read with pd.read_html.\nYou use await page.content() to save the contents of the page, then feed it to read_html to find the tables. len(tables) checks the number of tables you have, then you manually poke around to see which one is the one you’re interested in. tables[0] is the first one, tables[1] is the second one, and so on…\nimport pandas as pd\nfrom io import StringIO\n\nhtml = await page.content()\ntables = pd.read_html(StringIO(html))\nlen(tables)\ntables[0]",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#clicking-next-page-one",
-    "href": "prompt.html#clicking-next-page-one",
-    "title": "Our scraping prompt",
-    "section": "Clicking “next page” one",
-    "text": "Clicking “next page” one\nJust like using a dropdown, select box or button, we’ll use page.get_by_text to try to select the button.\nWe add timeout=10000 to wait 5 seconds before confirming it isn’t there.\n# page.get_by_text(\"Next Page\").click()\nawait page.locator(\"a:has-text('Next Page')\").click(timeout=10000)",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#clicking-next-page-until-it-disappears",
-    "href": "prompt.html#clicking-next-page-until-it-disappears",
-    "title": "Our scraping prompt",
-    "section": "Clicking “next page” until it disappears",
-    "text": "Clicking “next page” until it disappears\nEventually the “next page” link disappears, and Python starts screaming. We use try/except down below to say “don’t worry little baby, it’s okay, we’ll just finish up if the button is gone.”\n# all of our data will end up going here\nall_data = pd.DataFrame()\n\nwhile True:\n    await page.wait_for_selector(\"table\")\n\n    # Get all of the tables on the page\n    html = await page.content()\n    tables = pd.read_html(StringIO(html))\n\n    # Get the table (and edit if necessary)\n    df = tables[0]\n\n    # Add the tables on this page to the big list of stuff\n    all_data = pd.concat([all_data, df], ignore_index = True)\n    try:\n        await page.locator(\"a:has-text('Next Page')\").click(timeout=5000)\n    except:\n        break\nall_data",
-    "crumbs": [
-      "Scraping prompt"
-    ]
-  },
-  {
-    "objectID": "prompt.html#saving-the-results",
-    "href": "prompt.html#saving-the-results",
-    "title": "Our scraping prompt",
-    "section": "Saving the results",
-    "text": "Saving the results\nNow we’ll save it to a CSV file! Easy peasy.\nall_data.to_csv(\"output.csv\", index=False)\n```",
+    "text": "Copy and paste the prompt below\nI have the following guide about scraping a website. Please adapt it to be for how to scrape a different website.\n\nProceed in several steps, one at a time. Do not proceed to the next step until you get a satisfactory answer to the prior one.\n\n1. Ask what the URL is\n2. Ask if there are any forms or fields to be filled out. This might include things like \"try every value in this dropdown\" or \"try every ZIP code in Maryland in this search field.\" \n3. Confirm the columns for the final dataset\n4. Confirm pagination details\n5. Write the guide\n\nIf there is a form that needs to be filled out, you may need to get the HTML for the entire form or parts of the form. If necessary a similar walkthrough as below to understand the HTML. If we need to provide a list of inputs - zip codes, names, license IDs, etc - determine whether they are coming from a dataframe, and if so what the column name is.\n\nTo confirm columns details, walk me through how to copy the outer HTML of one \"row\" of data. I'm new to scraping and might need help. Decide on columns to be saved, then confirm them with me. If it isn't clear, explain what you need from me.\n\nHelp me determine the pagination situation. Are there multiple pages of content? Is there a 'next page' button that can be pressed again and again? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.\n\n## Important Notes: \n\n- You MUST use async playwright\n- Do NOT use asyncio and do NOT wrap everything in an async function.\n- If displaying a dataframe, do NOT use print or ace_tools, just use df.head()\n- The sample tutorial reads a table with pd.read_html. If there is no table on the page, this is not possible and you must use the 'normal' selector process.\n- To protect against missing data, create the DataFrame from a list of dictionaries, not a dictionary of lists. Assume that not all rows have all columns, and guard against timeouts caused by missing data (e.g. some elements might not have a description).\n- If it is a multi-page scraper, provide code to test whether the scraper works on one page of data before jumping into the full process. Ask whether I am satisfied with the result before proceeding.\n- Be resilient against errors when scraping, printing details on failures to help debugging\n- You do NOT need to close the browser. We can figure that out ourselves.\n- Provide complete code\n- The site might be slow or I might have bad internet, set all timeouts to be 10 seconds at a minimum\n\nGUIDE:\n\n## Installation\n\nWe need to install a few tools first! Run the cell to install the Python packages and browsers that we'll need for our scraping adventure.\n\n```\n%pip install lxml html5lib beautifulsoup4 pandas\n%pip install --quiet playwright\n!playwright install\n```\n\n## Opening up the browser and visiting our destination\n\nNote that we will NOT use asyncio or sync_playwright in the example below. We also do NOT wrap our code in a big async function.\n\n```\nfrom playwright.async_api import async_playwright\n\n# \"Hey, open up a browser\"\nplaywright = await async_playwright().start()\nbrowser = await playwright.chromium.launch(headless=False)\n\n# Create a new browser window\npage = await browser.new_page()\nawait page.goto(\"https://ia-plb.my.site.com/LicenseSearchPage\")\n```\n\n## Selecting an option from a dropdown\n\nYou always start with await page.locator(\"select\").select_option(\"whatever option you want\"). You'll probably get an error because there are multiple dropdowns on the page, but Playwright doesn't know which one you want to use! Just read the error and figure out the right one.\n\n```\n# await page.locator(\"select\").select_option(\"Appraisal Management Company\")\nawait page.get_by_label(\"Licensing Board:\").select_option(\"Appraisal Management Company\")\n# await page.get_by_text(\"Search\").click()\nawait page.locator(\"input[name=\\\"j_id0\\\\:j_id1\\\\:j_id14\\\\:j_id73\\\"]\").click()\n```\n\n## Grab the tables from the page\n\nPandas is the Python equivalent to Excel, and it's great at dealing with tabular data! Often the data on a web page that looks like a spreadsheet can be read with pd.read_html.\n\nYou use await page.content() to save the contents of the page, then feed it to read_html to find the tables. len(tables) checks the number of tables you have, then you manually poke around to see which one is the one you're interested in. tables[0] is the first one, tables[1] is the second one, and so on...\n\n```\nimport pandas as pd\nfrom io import StringIO\n\nhtml = await page.content()\ntables = pd.read_html(StringIO(html))\nlen(tables)\ntables[0]\n```\n\n## Clicking \"next page\" one\n\nJust like using a dropdown, select box or button, we'll use page.get_by_text to try to select the button.\n\nWe add timeout=10000 to wait 5 seconds before confirming it isn't there.\n\n```\n# page.get_by_text(\"Next Page\").click()\nawait page.locator(\"a:has-text('Next Page')\").click(timeout=10000)\n```\n\n## Clicking \"next page\" until it disappears\n\nEventually the \"next page\" link disappears, and Python starts screaming. We use try/except down below to say \"don't worry little baby, it's okay, we'll just finish up if the button is gone.\"\n\n```\n# all of our data will end up going here\nall_data = pd.DataFrame()\n\nwhile True:\n    await page.wait_for_selector(\"table\")\n\n    # Get all of the tables on the page\n    html = await page.content()\n    tables = pd.read_html(StringIO(html))\n\n    # Get the table (and edit if necessary)\n    df = tables[0]\n\n    # Add the tables on this page to the big list of stuff\n    all_data = pd.concat([all_data, df], ignore_index = True)\n    try:\n        await page.locator(\"a:has-text('Next Page')\").click(timeout=5000)\n    except:\n        break\nall_data\n```\n\n## Saving the results\n\nNow we'll save it to a CSV file! Easy peasy.\n\n```\nall_data.to_csv(\"output.csv\", index=False)\n```",
     "crumbs": [
       "Scraping prompt"
     ]

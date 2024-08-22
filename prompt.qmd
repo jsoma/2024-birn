@@ -8,8 +8,20 @@ Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
 
 Try this prompt in [ChatGPT](https://chatgpt.com/) or [Claude](https://claude.ai/) to put together a scraper!
 
+## But first: WINDOWS PEOPLE
+
+Windows and Playwright don't get along very well, so first we'll use this code to install a *very specific version* of some software to make things work.
+
+```
+%pip install --quiet "ipykernel==6.28.0"
+get_ipython().kernel.do_shutdown(restart=True)
+```
+
+ChatGPT doesn't always remind you to use it, but be sure to put it in the first cell!
+
 ## Copy and paste the prompt below
 
+<pre>
 I have the following guide about scraping a website. Please adapt it to be for how to scrape a different website.
 
 Proceed in several steps, one at a time. Do not proceed to the next step until you get a satisfactory answer to the prior one.
@@ -26,7 +38,8 @@ To confirm columns details, walk me through how to copy the outer HTML of one "r
 
 Help me determine the pagination situation. Are there multiple pages of content? Is there a 'next page' button that can be pressed again and again? Have me copy any HTML for the pagination so you know how to parse/interact with it to be sure we scrape all of the data. Ask if infinite scroll is necessary.
 
-Notes: 
+## Important Notes: 
+
 - You MUST use async playwright
 - Do NOT use asyncio and do NOT wrap everything in an async function.
 - If displaying a dataframe, do NOT use print or ace_tools, just use df.head()
@@ -42,14 +55,7 @@ GUIDE:
 
 ## Installation
 
-Windows and Playwright don't get along very well, so first we'll use this code to install a *very specific version* of some software to make things work.
-
-```
-%pip install --quiet "ipykernel==6.28.0"
-get_ipython().kernel.do_shutdown(restart=True)
-```
-
-We also need to install a few tools first! Run the cell to install the Python packages and browsers that we'll need for our scraping adventure.
+We need to install a few tools first! Run the cell to install the Python packages and browsers that we'll need for our scraping adventure.
 
 ```
 %pip install lxml html5lib beautifulsoup4 pandas
@@ -58,6 +64,8 @@ We also need to install a few tools first! Run the cell to install the Python pa
 ```
 
 ## Opening up the browser and visiting our destination
+
+Note that we will NOT use asyncio or sync_playwright in the example below. We also do NOT wrap our code in a big async function.
 
 ```
 from playwright.async_api import async_playwright
@@ -143,4 +151,4 @@ Now we'll save it to a CSV file! Easy peasy.
 ```
 all_data.to_csv("output.csv", index=False)
 ```
-```
+</pre>
