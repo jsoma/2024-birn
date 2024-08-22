@@ -13,7 +13,7 @@ Try this prompt in [ChatGPT](https://chatgpt.com/) or [Claude](https://claude.ai
 Windows and Playwright don't get along very well, so first we'll use this code to install a *very specific version* of some software to make things work.
 
 ```
-%pip install --quiet "ipykernel==6.28.0"
+%%python -m pip install --quiet "ipykernel==6.28.0"
 get_ipython().kernel.do_shutdown(restart=True)
 ```
 

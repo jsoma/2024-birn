@@ -183,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="but-first-windows-people" class="level2">
 <h2 class="anchored" data-anchor-id="but-first-windows-people">But first: WINDOWS PEOPLE</h2>
 <p>Windows and Playwright don’t get along very well, so first we’ll use this code to install a <em>very specific version</em> of some software to make things work.</p>
-<pre><code>%pip install --quiet "ipykernel==6.28.0"
+<pre><code>%%python -m pip install --quiet "ipykernel==6.28.0"
 get_ipython().kernel.do_shutdown(restart=True)</code></pre>
 <p>ChatGPT doesn’t always remind you to use it, but be sure to put it in the first cell!</p>
 </section>
