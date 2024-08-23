@@ -1,0 +1,47 @@
+---
+title: AI for Reporting
+format:
+  html:
+    toc: true
+---
+
+::: {.callout-tip appearance="simple"}
+Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
+:::
+
+
+Links for you!
+
+[Practical AI for Investigative Journalism](https://www.youtube.com/playlist?list=PLewNEVDy7gq1_GPUaL0OQ31QsiHP5ncAQ), my YouTube series
+
+## Chatbots
+
+- [ChatGPT](https://chatgpt.com/)
+- [Claude](https://claude.ai/)
+- [Perplexity](https://www.perplexity.ai/), an AI search engine
+
+## Writing suggestions
+
+- [Grammarly](https://www.grammarly.com/)
+- [My simple editing prompt](writing-prompt.qmd)
+
+## AI stories
+
+- [Apple says its App Store is ‘a safe and trusted place.’ We found 1,500 reports of unwanted sexual behavior on six apps, some targeting minors.](https://www.washingtonpost.com/technology/2019/11/22/apple-says-its-app-store-is-safe-trusted-place-we-found-reports-unwanted-sexual-behavior-six-apps-some-targeting-minors/), from the Washington Post
+- [We Asked an AI to Map Our Stories Across NYC](https://www.thecity.nyc/2024/02/29/chatgpt-map-stories-nyc/), from THE CITY
+
+## AI in Google Sheets
+
+- [Claude for Sheets](https://workspace.google.com/marketplace/app/claude_for_sheets/909417792257)
+- [Example spreadsheet](https://docs.google.com/spreadsheets/d/13PmPW7GvWTUuf6Gq-Xufa-I2sDWrfx53pFPdV_yaMLw/edit?usp=sharing)
+
+## Transcription
+
+- [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper) for macOS
+- [EasyWhisper](https://easywhisper.io/), for Windows + macOS
+- [Whisper JAX](https://huggingface.co/spaces/sanchit-gandhi/whisper-jax), an online sample
+
+## Software
+
+- [AnythingLLM](https://anythingllm.com/), a chatbot where you can upload your documents
+- [LMStudio](https://lmstudio.ai/), if you want to run models on your own machine
