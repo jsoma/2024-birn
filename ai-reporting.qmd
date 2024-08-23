@@ -10,7 +10,7 @@ Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
 :::
 
 
-Links for you!
+[Slides](slides-practical-ai.qmd)
 
 [Practical AI for Investigative Journalism](https://www.youtube.com/playlist?list=PLewNEVDy7gq1_GPUaL0OQ31QsiHP5ncAQ), my YouTube series
 

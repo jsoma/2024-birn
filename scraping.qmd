@@ -9,6 +9,8 @@ format:
 Find this page at [bit.ly/birn-data](https://bit.ly/birn-data)
 :::
 
+[Slides](slides-scraping.qmd)
+
 ## Getting started
 
 Let's get started!
