@@ -8,6 +8,7 @@ Hi, I'm [Soma](https://twitter.com/dangerscarf)! This is everything I presented 
 
 - [Data analysis with Python and pandas](pandas.qmd)
 - [Scraping with Python and Playwright](scraping.qmd)
+- [AI for Reporting](ai-reporting.qmd)
 
 
 You can find other resources of mine at:
