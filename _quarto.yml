@@ -28,8 +28,6 @@ website:
         file: pandas.qmd
       - text: "Scraping with Python"
         file: scraping.qmd
-      - text: "Scraping prompt"
-        file: prompt.qmd
       - text: "AI for Reporting"
         file: ai-reporting.qmd
   page-footer: 
